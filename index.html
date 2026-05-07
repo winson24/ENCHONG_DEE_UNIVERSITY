@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enchong Dee University – Yearner Official</title>
+  <meta name="description"
+    content="Welcome to the official Yearner community of Enchong Dee University. Create your own Yearner Student ID and join the movement." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"></script>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <div class="nav-logo">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="30" cy="30" r="28" stroke="white" stroke-width="2.5" />
+            <text x="50%" y="38%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="11"
+              font-weight="900" font-family="Inter">ED</text>
+            <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="9"
+              font-weight="700" font-family="Inter">UU</text>
+            <ellipse cx="30" cy="52" rx="14" ry="3" fill="none" stroke="white" stroke-width="1.5" />
+            <ellipse cx="30" cy="8" rx="14" ry="3" fill="none" stroke="white" stroke-width="1.5" />
+          </svg>
+        </div>
+        <span class="nav-title">EDU <span>Yearner</span></span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active" data-tab="home">Home</a></li>
+        <li><a href="#about" class="nav-link" data-tab="about">About</a></li>
+        <li><a href="#id-maker" class="nav-link" data-tab="id-maker">ID Maker</a></li>
+        <li><a href="#gallery" class="nav-link" data-tab="gallery">Gallery</a></li>
+      </ul>
+      <button class="nav-cta" onclick="switchTab('id-maker')">Get Your ID</button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGES -->
+  <main>
+
+    <!-- HOME PAGE -->
+    <section class="page active" id="page-home">
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-bg-overlay"></div>
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-content">
+          <div class="hero-badge">✦ Official Yearner Community ✦</div>
+          <h1 class="hero-title">
+            <span class="hero-title-uni">ENCHONG DEE</span>
+            <span class="hero-title-univ">UNIVERSITY</span>
+            <span class="hero-title-dept">Department of Yearning</span>
+          </h1>
+          <p class="hero-subtitle">
+            "True yearning isn't just about feeling the absence;<br />
+            it's the quiet strength that drives a heart forward<br />
+            while holding onto its deepest hopes."
+          </p>
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="switchTab('id-maker')">
+              <span>Create Your ID</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
+            <button class="btn-ghost" onclick="switchTab('about')">Learn More</button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <div class="stat-num" id="counter-members">0</div>
+              <div class="stat-label">Yearners</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+              <div class="stat-num">∞</div>
+              <div class="stat-label">Valid Until</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+              <div class="stat-num">2026</div>
+              <div class="stat-label">Est. Year</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card-preview">
+          <div class="preview-id-card floating">
+            <div class="pic-header">ENCHONG DEE UNIVERSITY</div>
+            <div class="pic-body">
+              <div class="pic-photo-wrap">
+                <div class="pic-photo-placeholder">
+                  <svg viewBox="0 0 80 80" fill="none">
+                    <circle cx="40" cy="28" r="16" fill="#1a3a6b" opacity=".4" />
+                    <ellipse cx="40" cy="68" rx="26" ry="20" fill="#1a3a6b" opacity=".4" />
+                  </svg>
+                </div>
+                <div class="pic-role-badge">STUDENT</div>
+                <div class="pic-valid">VALID UNTIL<br /><strong>LIFETIME</strong></div>
+              </div>
+              <div class="pic-info">
+                <div class="pic-id-title">STUDENT <br /><span>IDENTIFICATION</span><br /><strong>CARD</strong></div>
+                <div class="pic-divider"></div>
+                <div class="pic-field"><span>POSITION</span><span>: STUDENT</span></div>
+                <div class="pic-field"><span>NAME</span><span>: YOUR NAME</span></div>
+                <div class="pic-field"><span>DEPARTMENT</span><span>: YEARNING</span></div>
+                <div class="pic-field"><span>STUDENT ID</span><span>: EDU-2026-XXXX</span></div>
+                <div class="pic-field"><span>JOINED</span><span>: 2026</span></div>
+                <div class="pic-codes">
+                  <div class="pic-qr-placeholder"></div>
+                  <div class="pic-bar-placeholder"></div>
+                </div>
+              </div>
+            </div>
+            <div class="pic-footer">"True yearning isn't just about feeling the absence; it's the quiet strength that
+              drives a heart forward while holding onto its deepest hopes."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features Section -->
+      <section class="features-section">
+        <div class="section-label">What We Offer</div>
+        <h2 class="section-title">Join the Department of Yearning</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🎓</div>
+            <h3>Official Student ID</h3>
+            <p>Generate your very own Enchong Dee University Yearner Student ID card — personalized with your photo,
+              name, and unique student ID number.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💙</div>
+            <h3>Yearner Community</h3>
+            <p>Connect with fellow yearners who share the same devotion. A community built on love, strength, and the
+              pursuit of deeper connections.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">♾️</div>
+            <h3>Valid for Lifetime</h3>
+            <p>Your membership in the Department of Yearning has no expiration date. Once a yearner, always a yearner.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">✨</div>
+            <h3>Shareable Card</h3>
+            <p>Download and share your ID card on social media. Show the world your official yearner status with pride.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quote Banner -->
+      <section class="quote-section">
+        <div class="quote-content">
+          <div class="quote-marks">"</div>
+          <p>True yearning isn't just about feeling the absence; it's the quiet strength that drives a heart forward
+            while holding onto its deepest hopes.</p>
+          <div class="quote-attr">— Enchong Dee University, Dept. of Yearning</div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ABOUT PAGE -->
+    <section class="page" id="page-about">
+      <div class="about-hero">
+        <div class="about-hero-content">
+          <div class="section-label">Our Story</div>
+          <h1>About Enchong Dee University</h1>
+          <p>A community born from admiration, nurtured by genuine love, and bound by the shared experience of yearning.
+          </p>
+        </div>
+      </div>
+      <div class="about-content">
+        <div class="about-grid">
+          <div class="about-card">
+            <div class="about-card-icon">🏛️</div>
+            <h3>Our Mission</h3>
+            <p>Enchong Dee University is the official home for yearners — a place where admiration evolves into a
+              beautiful community. We celebrate the strength found in longing and the beauty of unwavering devotion.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">📜</div>
+            <h3>Department of Yearning</h3>
+            <p>Our flagship department is dedicated to all who know what it means to truly yearn. Members receive a
+              lifetime enrollment with an official student ID, recognizing their role in this extraordinary community.
+            </p>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">🌟</div>
+            <h3>Our Values</h3>
+            <p>We believe in the power of hope, the quiet strength of longing, and the courage it takes to hold on to
+              what matters most. These values define every yearner in our community.</p>
+          </div>
+        </div>
+        <div class="about-cta-box">
+          <h2>Ready to Enroll?</h2>
+          <p>Join thousands of yearners who have already claimed their official student ID.</p>
+          <button class="btn-primary" onclick="switchTab('id-maker')">
+            <span>Create Your ID Now</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ID MAKER PAGE -->
+    <section class="page" id="page-id-maker">
+      <div class="idmaker-header">
+        <div class="section-label">Create Your Identity</div>
+        <h1>Yearner ID Card Maker</h1>
+        <p>Fill in your details and download your official Enchong Dee University Student ID</p>
+      </div>
+      <div class="idmaker-layout">
+        <!-- Form -->
+        <div class="idmaker-form-wrap">
+          <div class="form-card">
+            <h3 class="form-section-title">
+              <span class="form-step">1</span> Your Photo
+            </h3>
+            <div class="photo-upload-area" id="photoUploadArea">
+              <input type="file" id="photoInput" accept="image/*" style="display:none" />
+              <div class="photo-preview-wrap" id="photoPreviewWrap">
+                <img id="photoPreview" src="" alt="Your photo" style="display:none" />
+                <div class="photo-placeholder" id="photoPlaceholder">
+                  <svg viewBox="0 0 80 80" fill="none">
+                    <circle cx="40" cy="28" r="16" fill="#1a3a6b" opacity=".5" />
+                    <ellipse cx="40" cy="68" rx="26" ry="20" fill="#1a3a6b" opacity=".5" />
+                  </svg>
+                  <span>Click to upload photo</span>
+                </div>
+              </div>
+              <button class="btn-upload" onclick="document.getElementById('photoInput').click()">
+                📷 Upload Photo
+              </button>
+            </div>
+
+            <h3 class="form-section-title" style="margin-top:2rem">
+              <span class="form-step">2</span> Your Details
+            </h3>
+            <div class="form-group">
+              <label for="inputName">Full Name</label>
+              <input type="text" id="inputName" placeholder="e.g. Juan" maxlength="30" />
+            </div>
+            <div class="form-group">
+              <label for="inputPosition">Position</label>
+              <select id="inputPosition">
+                <option value="STUDENT">STUDENT</option>
+                <option value="OFFICER">OFFICER</option>
+                <option value="AMBASSADOR">AMBASSADOR</option>
+                <option value="PRESIDENT">PRESIDENT</option>
+                <option value="VICE PRESIDENT">VICE PRESIDENT</option>
+                <option value="SECRETARY">SECRETARY</option>
+                <option value="TREASURER">TREASURER</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputDept">Department</label>
+              <select id="inputDept">
+                <option value="YEARNING">YEARNING</option>
+                <option value="ADMIRATION">ADMIRATION</option>
+                <option value="DEVOTION">DEVOTION</option>
+                <option value="LONGING">LONGING</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputYear">Year Joined</label>
+              <select id="inputYear">
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputId">Student ID Number (last 4 digits)</label>
+              <input type="text" id="inputId" placeholder="e.g. 2126" maxlength="4" pattern="\d{4}" />
+              <small>Will become: EDU-2026-XXXX</small>
+            </div>
+            <div class="form-group">
+              <label for="inputQuote">Bottom Quote / Message <span class="label-optional">(customizable)</span></label>
+              <textarea id="inputQuote" rows="3" maxlength="220"
+                placeholder="Type your own quote or message here...">"True yearning isn't just about feeling the absence; it's the quiet strength that drives a heart forward while holding onto its deepest hopes."</textarea>
+              <small><span id="quoteCharCount">126</span> / 220 characters</small>
+            </div>
+
+            <button class="btn-generate" id="generateBtn" onclick="generateID()">
+              ✨ Generate My ID Card
+            </button>
+          </div>
+        </div>
+
+        <!-- Preview -->
+        <div class="idmaker-preview-wrap">
+          <div class="preview-label">Live Preview</div>
+          <div class="id-card-wrapper" id="idCardWrapper">
+            <div class="id-card" id="idCard">
+              <!-- Header -->
+              <div class="card-header">
+                <span class="card-univ-name" id="cardUnivName">ENCHONG DEE UNIVERSITY</span>
+              </div>
+              <!-- Body -->
+              <div class="card-body">
+                <!-- Left: photo -->
+                <div class="card-left">
+                  <div class="card-photo" id="cardPhoto">
+                    <img id="cardPhotoImg" src="" alt="Student Photo"
+                      style="display:none;width:100%;height:100%;object-fit:cover;border-radius:2px;" />
+                    <div class="card-photo-placeholder" id="cardPhotoPlaceholder">
+                      <svg viewBox="0 0 80 80" fill="none">
+                        <circle cx="40" cy="28" r="16" fill="#1a3a6b" opacity=".4" />
+                        <ellipse cx="40" cy="68" rx="26" ry="20" fill="#1a3a6b" opacity=".4" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="card-role-badge" id="cardRoleBadge">STUDENT</div>
+                  <div class="card-valid">
+                    <div class="card-valid-label">VALID UNTIL</div>
+                    <div class="card-valid-value">LIFETIME</div>
+                  </div>
+                </div>
+                <!-- Right: info -->
+                <div class="card-right">
+                  <div class="card-id-title">
+                    <div class="card-id-title-top">
+                      <div>
+                        <span class="cit-student">STUDENT</span><br />
+                        <span class="cit-identification">IDENTIFICATION</span><br />
+                        <span class="cit-card">CARD</span>
+                      </div>
+                      <div class="card-logo">
+                        <svg viewBox="0 0 70 70" fill="none">
+                          <circle cx="35" cy="35" r="32" stroke="#1a3a6b" stroke-width="3" />
+                          <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" fill="#1a3a6b"
+                            font-size="13" font-weight="900" font-family="Inter">ED</text>
+                          <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" fill="#1a3a6b"
+                            font-size="11" font-weight="700" font-family="Inter">UU</text>
+                          <ellipse cx="35" cy="62" rx="18" ry="4" fill="none" stroke="#1a3a6b" stroke-width="1.8" />
+                          <ellipse cx="35" cy="8" rx="18" ry="4" fill="none" stroke="#1a3a6b" stroke-width="1.8" />
+                        </svg>
+                      </div>
+                    </div>
+                    <hr class="card-divider" />
+                  </div>
+                  <div class="card-fields">
+                    <div class="card-field">
+                      <span class="cf-label">POSITION</span>
+                      <span class="cf-sep">:</span>
+                      <span class="cf-val" id="cf-position">STUDENT</span>
+                    </div>
+                    <div class="card-field">
+                      <span class="cf-label">NAME</span>
+                      <span class="cf-sep">:</span>
+                      <span class="cf-val" id="cf-name">YOUR NAME</span>
+                    </div>
+                    <div class="card-field">
+                      <span class="cf-label">DEPARTMENT</span>
+                      <span class="cf-sep">:</span>
+                      <span class="cf-val" id="cf-dept">YEARNING</span>
+                    </div>
+                    <div class="card-field">
+                      <span class="cf-label">STUDENT ID</span>
+                      <span class="cf-sep">:</span>
+                      <span class="cf-val" id="cf-id">EDU-2026-XXXX</span>
+                    </div>
+                    <div class="card-field">
+                      <span class="cf-label">JOINED</span>
+                      <span class="cf-sep">:</span>
+                      <span class="cf-val" id="cf-joined">2026</span>
+                    </div>
+                  </div>
+                  <div class="card-codes">
+                    <div class="card-qr" id="cardQr"></div>
+                    <div class="card-barcode-wrap">
+                      <svg id="cardBarcode"></svg>
+                      <div class="card-barcode-label" id="cardBarcodeLabel">EDU-2026-XXXX</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Footer -->
+              <div class="card-footer" id="cardFooterText">
+                "True yearning isn't just about feeling the absence; it's the quiet strength that drives a heart forward
+                while holding onto its deepest hopes."
+              </div>
+            </div>
+          </div>
+          <div class="preview-actions">
+            <button class="btn-download" id="downloadBtn" onclick="downloadID()">
+              ⬇ Download ID Card
+            </button>
+            <button class="btn-reset" onclick="resetForm()">Reset</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY PAGE -->
+    <section class="page" id="page-gallery">
+      <div class="gallery-header">
+        <div class="section-label">Our Community</div>
+        <h1>Yearner Gallery</h1>
+        <p>Yearners from all over who carry their ID with pride.</p>
+      </div>
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Sample gallery cards generated by JS -->
+      </div>
+      <div class="gallery-cta">
+        <p>Want to be featured here? Create your ID and share it with us!</p>
+        <button class="btn-primary" onclick="switchTab('id-maker')">
+          <span>Make My ID</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span>ENCHONG DEE UNIVERSITY</span>
+        <small>Department of Yearning · Est. 2026</small>
+      </div>
+      <div class="footer-quote">
+        "True yearning isn't just about feeling the absence."
+      </div>
+      <div class="footer-links">
+        <a onclick="switchTab('home')">Home</a>
+        <a onclick="switchTab('about')">About</a>
+        <a onclick="switchTab('id-maker')">ID Maker</a>
+        <a onclick="switchTab('gallery')">Gallery</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Enchong Dee University – Yearner Official. All Rights Reserved.</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
