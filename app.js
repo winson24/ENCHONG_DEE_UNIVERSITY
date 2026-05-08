@@ -242,3 +242,148 @@ function renderGallery() {
 
 // ===== INIT =====
 liveUpdate();
+
+// ===== YOUTUBE MUSIC PLAYER =====
+let ytPlayer = null;
+let ytMuted = false;
+let ytPlaying = false;
+let ytTitleInterval = null;
+
+// Called automatically by YouTube IFrame API once script loads
+function onYouTubeIframeAPIReady() {
+  ytPlayer = new YT.Player('ytPlayer', {
+    height: '1',
+    width: '1',
+    playerVars: {
+      listType: 'playlist',
+      list: 'PLiy0XOfUv4hHoME_9Odd_LGqGERwFkvMD',
+      autoplay: 1,
+      mute: 1,          // start muted to satisfy autoplay policy
+      controls: 0,
+      disablekb: 1,
+      loop: 1,
+      rel: 0,
+      playsinline: 1,
+      enablejsapi: 1,
+    },
+    events: {
+      onReady: onYtReady,
+      onStateChange: onYtStateChange,
+    }
+  });
+}
+
+function onYtReady(e) {
+  e.target.playVideo();
+  ytMuted = true;
+  updateMuteIcon();
+  // Unmute on first user interaction
+  document.addEventListener('click', function unmuteFn() {
+    if (ytPlayer && ytMuted) {
+      ytPlayer.unMute();
+      ytMuted = false;
+      updateMuteIcon();
+    }
+    document.removeEventListener('click', unmuteFn);
+  }, { once: true });
+  startTitlePoll();
+}
+
+function onYtStateChange(e) {
+  const state = e.data;
+  if (state === YT.PlayerState.PLAYING) {
+    ytPlaying = true;
+    document.getElementById('mpDisc').classList.add('spinning');
+    document.getElementById('mpMiniDisc').classList.add('spinning');
+    document.getElementById('mpPlayIcon').innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+  } else {
+    ytPlaying = false;
+    document.getElementById('mpDisc').classList.remove('spinning');
+    document.getElementById('mpMiniDisc').classList.remove('spinning');
+    document.getElementById('mpPlayIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+  }
+  updateSongTitle();
+}
+
+function startTitlePoll() {
+  clearInterval(ytTitleInterval);
+  ytTitleInterval = setInterval(updateSongTitle, 3000);
+  updateSongTitle();
+}
+
+function updateSongTitle() {
+  if (!ytPlayer || typeof ytPlayer.getVideoData !== 'function') return;
+  try {
+    const data = ytPlayer.getVideoData();
+    const title = (data && data.title) ? data.title : 'Yearner Playlist';
+    const el = document.getElementById('mpTitle');
+    if (el) {
+      el.textContent = title;
+      // Enable marquee for long titles
+      el.classList.toggle('marquee', title.length > 22);
+    }
+  } catch (_) {}
+}
+
+function ytToggle() {
+  if (!ytPlayer) return;
+  if (ytPlaying) {
+    ytPlayer.pauseVideo();
+  } else {
+    ytPlayer.playVideo();
+    if (ytMuted) {
+      ytPlayer.unMute();
+      ytMuted = false;
+      updateMuteIcon();
+    }
+  }
+}
+
+function ytNext() {
+  if (!ytPlayer) return;
+  ytPlayer.nextVideo();
+  setTimeout(updateSongTitle, 600);
+}
+
+function ytPrev() {
+  if (!ytPlayer) return;
+  ytPlayer.previousVideo();
+  setTimeout(updateSongTitle, 600);
+}
+
+function ytToggleMute() {
+  if (!ytPlayer) return;
+  if (ytMuted) {
+    ytPlayer.unMute();
+    ytMuted = false;
+  } else {
+    ytPlayer.mute();
+    ytMuted = true;
+  }
+  updateMuteIcon();
+}
+
+function updateMuteIcon() {
+  const btn = document.getElementById('mpVol');
+  const icon = document.getElementById('mpVolIcon');
+  if (!btn || !icon) return;
+  if (ytMuted) {
+    btn.classList.add('muted');
+    icon.innerHTML = '<path d="M16.5 12A4.5 4.5 0 0 0 14 7.97v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06A8.82 8.82 0 0 0 17.73 20L19 21.27 20.27 20 5.27 3 4.27 3zM12 4 9.91 6.09 12 8.18V4z"/>';
+  } else {
+    btn.classList.remove('muted');
+    icon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
+  }
+}
+
+function toggleMusicPlayer() {
+  const player = document.getElementById('musicPlayer');
+  const pill = document.getElementById('mpMiniPill');
+  if (player.style.display === 'none') {
+    player.style.display = 'flex';
+    pill.style.display = 'none';
+  } else {
+    player.style.display = 'none';
+    pill.style.display = 'flex';
+  }
+}

@@ -223,3 +223,89 @@ main{padding-top:70px}
   .footer-inner{flex-direction:column;text-align:center}
   .footer-quote{display:none}
 }
+
+/* ===== FLOATING MUSIC PLAYER ===== */
+.music-player{
+  position:fixed;bottom:1.5rem;right:1.5rem;
+  display:flex;align-items:center;gap:1rem;
+  background:rgba(8,28,62,.92);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(201,168,76,.3);
+  border-radius:60px;
+  padding:.7rem 1.2rem .7rem .9rem;
+  z-index:999;
+  box-shadow:0 8px 40px rgba(0,0,0,.45),0 0 0 1px rgba(201,168,76,.1);
+  min-width:320px;max-width:420px;
+  animation:mpSlideIn .5s cubic-bezier(.175,.885,.32,1.275) both;
+  transition:opacity .3s,transform .3s;
+}
+@keyframes mpSlideIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* Vinyl disc */
+.mp-disc{
+  width:42px;height:42px;flex-shrink:0;
+  background:radial-gradient(circle at 40% 40%,#2356a0,#081c3e);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid rgba(201,168,76,.4);
+  position:relative;overflow:hidden;
+}
+.mp-disc svg{width:36px;height:36px}
+.mp-disc.spinning{animation:discSpin 3s linear infinite}
+@keyframes discSpin{to{transform:rotate(360deg)}}
+
+/* Song info */
+.mp-info{flex:1;overflow:hidden;min-width:0}
+.mp-title{
+  font-size:.78rem;font-weight:700;color:#fff;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  max-width:140px;
+}
+.mp-title.marquee{animation:marquee 10s linear infinite}
+@keyframes marquee{0%{transform:translateX(0)}40%{transform:translateX(calc(-100% + 130px))}60%{transform:translateX(calc(-100% + 130px))}100%{transform:translateX(0)}}
+.mp-sub{font-size:.67rem;color:rgba(201,168,76,.8);font-weight:500;margin-top:.1rem}
+
+/* Controls */
+.mp-controls{display:flex;align-items:center;gap:.35rem}
+.mp-btn{
+  background:none;border:none;cursor:pointer;
+  color:rgba(255,255,255,.7);
+  padding:.35rem;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.mp-btn svg{width:18px;height:18px}
+.mp-btn:hover{color:#fff;background:rgba(255,255,255,.12)}
+.mp-play{
+  background:linear-gradient(135deg,#c9a84c,#e8c96b)!important;
+  color:#0d2b5e!important;
+  width:36px;height:36px;border-radius:50%;
+  box-shadow:0 4px 14px rgba(201,168,76,.5);
+}
+.mp-play:hover{transform:scale(1.1);box-shadow:0 6px 20px rgba(201,168,76,.7)}
+.mp-play svg{width:16px;height:16px}
+
+/* Right side */
+.mp-right{display:flex;align-items:center;gap:.25rem}
+.mp-vol.muted svg{opacity:.4}
+
+/* Minimized pill */
+.mp-mini-pill{
+  position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;
+  display:flex;align-items:center;gap:.5rem;
+  background:rgba(8,28,62,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(201,168,76,.3);border-radius:50px;
+  padding:.55rem 1rem;cursor:pointer;
+  color:#fff;font-size:.82rem;font-weight:600;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);
+  transition:all .2s;animation:mpSlideIn .4s both;
+}
+.mp-mini-pill:hover{background:rgba(13,43,94,.98);transform:translateY(-2px)}
+.mp-mini-disc.spinning{display:inline-block;animation:discSpin 2s linear infinite}
+
+/* Responsive */
+@media(max-width:600px){
+  .music-player{min-width:0;max-width:calc(100vw - 3rem);bottom:1rem;right:1rem;padding:.6rem .9rem .6rem .75rem}
+  .mp-title{max-width:90px}
+  .mp-mini-pill{bottom:1rem;right:1rem}
+}
