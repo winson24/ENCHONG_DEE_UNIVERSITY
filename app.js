@@ -258,7 +258,7 @@ function onYouTubeIframeAPIReady() {
       listType: 'playlist',
       list: 'PLiy0XOfUv4hHoME_9Odd_LGqGERwFkvMD',
       autoplay: 1,
-      mute: 1,          // start muted to satisfy autoplay policy
+      mute: 0,          // start unmuted
       controls: 0,
       disablekb: 1,
       loop: 1,
@@ -275,17 +275,8 @@ function onYouTubeIframeAPIReady() {
 
 function onYtReady(e) {
   e.target.playVideo();
-  ytMuted = true;
+  ytMuted = false;
   updateMuteIcon();
-  // Unmute on first user interaction
-  document.addEventListener('click', function unmuteFn() {
-    if (ytPlayer && ytMuted) {
-      ytPlayer.unMute();
-      ytMuted = false;
-      updateMuteIcon();
-    }
-    document.removeEventListener('click', unmuteFn);
-  }, { once: true });
   startTitlePoll();
 }
 
