@@ -261,7 +261,7 @@ function onYouTubeIframeAPIReady() {
       mute: 0,          // start unmuted
       controls: 0,
       disablekb: 1,
-      loop: 1,
+      loop: 0,
       rel: 0,
       playsinline: 1,
       enablejsapi: 1,
@@ -313,7 +313,7 @@ function updateSongTitle() {
       // Enable marquee for long titles
       el.classList.toggle('marquee', title.length > 22);
     }
-  } catch (_) {}
+  } catch (_) { }
 }
 
 function ytToggle() {
