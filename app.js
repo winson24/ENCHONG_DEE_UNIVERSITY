@@ -258,7 +258,7 @@ function onYouTubeIframeAPIReady() {
       listType: 'playlist',
       list: 'PLiy0XOfUv4hHoME_9Odd_LGqGERwFkvMD',
       autoplay: 1,
-      mute: 0,          // start unmuted
+      mute: 1,          // must start muted for autoplay; we unMute() immediately after
       controls: 0,
       disablekb: 1,
       loop: 0,
@@ -275,8 +275,15 @@ function onYouTubeIframeAPIReady() {
 
 function onYtReady(e) {
   e.target.playVideo();
-  ytMuted = false;
-  updateMuteIcon();
+  // Unmute immediately after playback starts (browser allows this after play() is called)
+  setTimeout(() => {
+    try {
+      e.target.unMute();
+      e.target.setVolume(80);
+    } catch (_) { }
+    ytMuted = false;
+    updateMuteIcon();
+  }, 500);
   startTitlePoll();
 }
 
